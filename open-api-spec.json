@@ -1,0 +1,38 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Sample API"
+    },
+    "paths": {
+      "/sample": {
+        "get": {
+          "summary": "Sample endpoint",
+          "operationId": "sample",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "x-amazon-apigateway-integration": {
+            "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${openApiSampleLambdaArn}/invocations",
+            "passthroughBehavior": "when_no_match",
+            "httpMethod": "POST",
+            "type": "aws_proxy"
+          }
+        }
+      }
+    }
+  }
